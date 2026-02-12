@@ -10,21 +10,70 @@ import (
 type Country int
 
 const (
-	Albania   Country = 95
-	Austria   Country = 54
-	Belgium   Country = 34
-	EuroZone  Country = 72
-	Finland   Country = 71
-	France    Country = 22
-	Germany   Country = 17
-	Russia    Country = 56
-	UK        Country = 4
-	Canada    Country = 6
-	US        Country = 5
-	Australia Country = 25
-	China     Country = 37
-	Japan     Country = 35
+	Albania     Country = 95
+	Austria     Country = 54
+	Belgium     Country = 34
+	EuroZone    Country = 72
+	Finland     Country = 71
+	France      Country = 22
+	Germany     Country = 17
+	Russia      Country = 56
+	UK          Country = 4
+	Canada      Country = 6
+	US          Country = 5
+	Australia   Country = 25
+	China       Country = 37
+	Japan       Country = 35
+	Italy       Country = 10
+	Taiwan      Country = 46
+	SouthAfrica Country = 110
+	Greece      Country = 51
+	Turkey      Country = 63
 )
+
+func (c Country) String() string {
+	switch c {
+	case Albania:
+		return "Albania"
+	case Austria:
+		return "Austria"
+	case Belgium:
+		return "Belgium"
+	case EuroZone:
+		return "Euro Zone"
+	case Finland:
+		return "Finland"
+	case France:
+		return "France"
+	case Germany:
+		return "Germany"
+	case Russia:
+		return "Russia"
+	case UK:
+		return "UK"
+	case Canada:
+		return "Canada"
+	case US:
+		return "US"
+	case Australia:
+		return "Australia"
+	case China:
+		return "China"
+	case Japan:
+		return "Japan"
+	case Italy:
+		return "Italy"
+	case Taiwan:
+		return "Taiwan"
+	case SouthAfrica:
+		return "South Africa"
+	case Greece:
+		return "Greece"
+	case Turkey:
+		return "Turkey"
+	}
+	return "Unknown"
+}
 
 type Category string
 
@@ -59,7 +108,7 @@ type Filter struct {
 	Limit      int
 	StartDate  time.Time
 	EndDate    time.Time
-	Importance Importance
+	Importance []Importance
 	Countries  []Country
 	Categories []Category
 	PageCursor string
@@ -132,8 +181,14 @@ func (f *Filter) String() string {
 	if !f.EndDate.IsZero() {
 		vars = append(vars, fmt.Sprintf("end_date=%s", f.EndDate.Format("2006-01-02T15:04:05.000Z")))
 	}
-	if f.Importance != "" {
-		vars = append(vars, fmt.Sprintf("importance=%s", f.Importance))
+	if f.Importance != nil {
+		importance := make([]string, 0)
+		for _, i := range f.Importance {
+			importance = append(importance, string(i))
+		}
+		if len(importance) > 0 {
+			vars = append(vars, fmt.Sprintf("importance=%s", strings.Join(importance, ",")))
+		}
 	}
 	if f.Countries != nil {
 		countries := make([]string, 0)

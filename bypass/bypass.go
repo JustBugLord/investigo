@@ -1,4 +1,4 @@
-package investigo
+package bypass
 
 import (
 	"crypto/rand"
