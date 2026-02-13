@@ -20,21 +20,21 @@ const (
 )
 
 type Event struct {
-	Category         string    `json:"category"`
-	CountryId        Country   `json:"country_id"`
-	Currency         string    `json:"currency"`
-	Description      string    `json:"description"`
-	EventCycleSuffix string    `json:"event_cycle_suffix,omitempty"`
-	EventId          int       `json:"event_id"`
-	EventMetaTitle   string    `json:"event_meta_title"`
-	EventTranslated  string    `json:"event_translated"`
-	Importance       string    `json:"importance"`
-	LongName         string    `json:"long_name"`
-	PageLink         string    `json:"page_link"`
-	ShortName        string    `json:"short_name"`
-	Source           string    `json:"source"`
-	SourceUrl        string    `json:"source_url"`
-	EventType        EventType `json:"event_type,omitempty"`
+	Category         string     `json:"category"`
+	CountryId        Country    `json:"country_id"`
+	Currency         string     `json:"currency"`
+	Description      string     `json:"description"`
+	EventCycleSuffix string     `json:"event_cycle_suffix,omitempty"`
+	EventId          int        `json:"event_id"`
+	EventMetaTitle   string     `json:"event_meta_title"`
+	EventTranslated  string     `json:"event_translated"`
+	Importance       Importance `json:"importance"`
+	LongName         string     `json:"long_name"`
+	PageLink         string     `json:"page_link"`
+	ShortName        string     `json:"short_name"`
+	Source           string     `json:"source"`
+	SourceUrl        string     `json:"source_url"`
+	EventType        EventType  `json:"event_type,omitempty"`
 }
 
 type Occurrence struct {
